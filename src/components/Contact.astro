@@ -1,0 +1,47 @@
+---
+/**
+ * Section « Contact » : formulaire fonctionnel (île React + Formspree)
+ * et liens directs (email, GitHub, LinkedIn).
+ */
+import Section from './Section.astro';
+import ContactForm from './react/ContactForm';
+import { SITE } from '../data/site';
+
+const liens = [
+  { label: 'Email', value: SITE.email, href: `mailto:${SITE.email}` },
+  { label: 'GitHub', value: SITE.github.replace('https://', ''), href: SITE.github },
+  { label: 'LinkedIn', value: 'Mon profil LinkedIn', href: SITE.linkedin },
+];
+---
+
+<Section id="contact" index="04" kicker="Contact" title="Travaillons ensemble">
+  <div class="grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+    <div>
+      <p class="text-lg leading-relaxed text-mist">
+        Je suis à la recherche d’un premier poste de développeur à partir de
+        <strong class="font-semibold text-fog"> septembre 2026</strong>, de préférence dans les
+        secteurs de la finance ou du génie civil. Une opportunité, une question sur un projet,
+        ou simplement envie d’échanger ? Écrivez-moi.
+      </p>
+
+      <ul class="mt-8 space-y-4" role="list">
+        {liens.map((lien) => (
+          <li>
+            <a
+              href={lien.href}
+              target={lien.href.startsWith('mailto') ? undefined : '_blank'}
+              rel={lien.href.startsWith('mailto') ? undefined : 'noopener noreferrer'}
+              class="group flex flex-col rounded-lg border border-line bg-card px-5 py-4 transition-colors hover:border-brass/50"
+            >
+              <span class="font-mono text-xs tracking-wide text-brass uppercase">{lien.label}</span>
+              <span class="mt-0.5 font-medium text-fog group-hover:text-brass">{lien.value}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- L'île n'est hydratée que lorsqu'elle devient visible -->
+    <ContactForm formspreeId={SITE.formspreeId} client:visible />
+  </div>
+</Section>

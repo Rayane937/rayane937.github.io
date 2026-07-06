@@ -1,0 +1,49 @@
+---
+/**
+ * Section « À propos » : présentation courte + repères clés du parcours.
+ */
+import Section from './Section.astro';
+
+const reperes = [
+  { label: 'Formation', value: 'Polytech Paris-Saclay — Informatique' },
+  { label: 'Diplôme', value: 'Septembre 2026' },
+  { label: 'Poste visé', value: 'Développeur — Finance ou Génie civil' },
+  { label: 'Localisation', value: 'Île-de-France' },
+];
+---
+
+<Section id="a-propos" index="01" kicker="À propos" title="Un profil polyvalent, curieux par nature" alt>
+  <div class="grid gap-12 lg:grid-cols-[1.6fr_1fr]">
+    <div class="space-y-5 text-lg leading-relaxed text-mist">
+      <p>
+        Je termine mon cursus d’ingénieur en informatique à Polytech Paris-Saclay, et ce qui me
+        motive n’a pas changé depuis ma première ligne de code : <strong class="font-semibold text-fog">
+        comprendre comment les choses fonctionnent, puis construire quelque chose d’utile avec</strong>.
+      </p>
+      <p>
+        Ces trois dernières années, j’ai volontairement exploré des terrains variés : une application
+        web fullstack avec React et Spring Boot, un moteur de quiz et des simulations physiques en
+        JavaScript pur, du NLP en Python, des applications JavaFX et même un jeu de cartes en C++.
+        Cette diversité m’a appris à choisir l’outil adapté au problème plutôt que l’inverse — et à
+        être rapidement opérationnel sur une nouvelle stack.
+      </p>
+      <p>
+        Aujourd’hui, je cherche une équipe où continuer à progresser sur l’ensemble de la chaîne,
+        du modèle de données à l’interface — de préférence dans les secteurs de la
+        <strong class="font-semibold text-fog">finance</strong> ou du
+        <strong class="font-semibold text-fog">génie civil</strong>, où le logiciel répond à des
+        enjeux concrets et mesurables.
+      </p>
+    </div>
+
+    <!-- Repères clés, en liste de définitions pour la sémantique -->
+    <dl class="h-fit divide-y divide-line rounded-lg border border-line bg-card">
+      {reperes.map((r) => (
+        <div class="flex flex-col gap-1 px-5 py-4">
+          <dt class="font-mono text-xs tracking-wide text-brass uppercase">{r.label}</dt>
+          <dd class="font-medium text-fog">{r.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+</Section>

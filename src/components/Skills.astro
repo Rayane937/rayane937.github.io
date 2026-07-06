@@ -1,0 +1,26 @@
+---
+/**
+ * Section « Compétences » : groupes de compétences rendus statiquement
+ * (aucun JavaScript nécessaire côté client).
+ */
+import Section from './Section.astro';
+import { SKILL_GROUPS } from '../data/skills';
+---
+
+<Section id="competences" index="02" kicker="Compétences" title="Ma boîte à outils">
+  <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" role="list">
+    {SKILL_GROUPS.map((group) => (
+      <li class="rounded-lg border border-line bg-card p-6 transition-colors hover:border-brass/40">
+        <h3 class="text-lg font-semibold text-fog">{group.title}</h3>
+        <p class="mt-1 mb-4 text-sm text-mist">{group.blurb}</p>
+        <ul class="flex flex-wrap gap-2" role="list">
+          {group.skills.map((skill) => (
+            <li class="rounded-full border border-line bg-night px-3 py-1 text-sm font-medium text-fog">
+              {skill}
+            </li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ul>
+</Section>

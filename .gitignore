@@ -1,0 +1,17 @@
+# Dépendances
+node_modules/
+
+# Build
+dist/
+.astro/
+
+# Environnement
+.env
+.env.*
+
+# Système / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

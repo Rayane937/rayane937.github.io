@@ -1,0 +1,19 @@
+---
+/**
+ * Pied de page : mention de la stack et rappel des liens sociaux.
+ */
+import { SITE } from '../data/site';
+
+const annee = new Date().getFullYear();
+---
+
+<footer class="border-t border-line/60 bg-night-soft">
+  <div class="mx-auto flex w-full max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-mist sm:flex-row sm:px-8">
+    <p>© {annee} {SITE.name} — Construit avec Astro, React et Tailwind CSS.</p>
+    <div class="flex gap-6">
+      <a href={SITE.github} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-brass">GitHub</a>
+      <a href={SITE.linkedin} target="_blank" rel="noopener noreferrer" class="transition-colors hover:text-brass">LinkedIn</a>
+      <a href={`mailto:${SITE.email}`} class="transition-colors hover:text-brass">Email</a>
+    </div>
+  </div>
+</footer>

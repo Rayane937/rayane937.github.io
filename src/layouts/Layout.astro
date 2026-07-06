@@ -1,0 +1,57 @@
+---
+/**
+ * Layout racine : <head> complet (SEO, Open Graph, JSON-LD), police et styles globaux.
+ */
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import { SITE } from '../data/site';
+
+const title = `${SITE.name} — ${SITE.role}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+/** Données structurées schema.org : aide les moteurs de recherche à identifier le profil */
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.name,
+  jobTitle: SITE.role,
+  email: `mailto:${SITE.email}`,
+  url: canonical,
+  sameAs: [SITE.github, SITE.linkedin],
+});
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={SITE.description} />
+    <meta name="author" content={SITE.name} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0b0f17" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph / partage sur les réseaux -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={SITE.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary" />
+
+    <script type="application/ld+json" set:html={jsonLd} />
+  </head>
+  <body class="bg-night font-sans text-fog">
+    <!-- Lien d'évitement pour la navigation clavier / lecteurs d'écran -->
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-brass focus:px-4 focus:py-2 focus:font-semibold focus:text-night"
+    >
+      Aller au contenu
+    </a>
+    <slot />
+  </body>
+</html>

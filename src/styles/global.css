@@ -1,0 +1,56 @@
+/*
+ * Feuille de style globale.
+ * Le design system est défini ici via les tokens Tailwind v4 (@theme) :
+ * palette "nuit" (bleu encre) + accent laiton, typo Inter Variable.
+ */
+@import 'tailwindcss';
+
+@theme {
+  /* Typographie */
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
+
+  /* Palette — fond */
+  --color-night: #0b0f17; /* fond principal */
+  --color-night-soft: #111827; /* fond alterné de section */
+  --color-card: #131c2c; /* surfaces (cartes, champs) */
+  --color-line: #223049; /* bordures discrètes */
+
+  /* Palette — texte */
+  --color-fog: #e8edf6; /* texte principal */
+  --color-mist: #9aa8bf; /* texte secondaire */
+
+  /* Palette — accent (laiton) */
+  --color-brass: #e9b45c;
+  --color-brass-bright: #f2c77c;
+}
+
+/* Défilement doux vers les ancres, sauf si l'utilisateur préfère limiter les animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+html {
+  background-color: var(--color-night);
+  color: var(--color-fog);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Décale la cible des ancres sous le header sticky */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+::selection {
+  background-color: var(--color-brass);
+  color: var(--color-night);
+}
+
+/* Anneau de focus visible et cohérent sur tout le site (accessibilité clavier) */
+:focus-visible {
+  outline: 2px solid var(--color-brass);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
