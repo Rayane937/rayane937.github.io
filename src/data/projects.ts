@@ -91,7 +91,7 @@ export const PROJECTS: Project[] = [
       '100 % statique, sans framework ni dépendance.',
     tags: ['JavaScript', 'Canvas', 'SVG', 'HTML/CSS', 'localStorage'],
     sector: 'aeronautique',
-    github: null,
+    github: 'https://github.com/Rayane937/AeroTrainer',
     demo: null,
   },
   {
@@ -127,7 +127,7 @@ export const PROJECTS: Project[] = [
       'Java graphique / IHM de l’Université Paris-Saclay.',
     tags: ['Java', 'MVC', 'IHM'],
     sector: 'informatique',
-    github: null,
+    github: 'https://github.com/Rayane937/Projet_Labyrinthe',
     demo: null,
   },
   {
