@@ -1,0 +1,39 @@
+---
+/**
+ * Section réutilisable pour un secteur : même design pour les quatre secteurs
+ * (Finance, Génie civil, Aéronautique, Informatique). Les projets affichés
+ * sont ceux de PROJECTS dont le `sector` correspond — pour enrichir une
+ * section, il suffit d'ajouter un projet dans src/data/projects.ts.
+ */
+import Section from './Section.astro';
+import ProjectCard from './ProjectCard.astro';
+import { PROJECTS, type SectorInfo } from '../data/projects';
+
+interface Props {
+  sector: SectorInfo;
+  /** Numéro affiché dans le kicker (ex. "03") */
+  index: string;
+  /** Fond alterné, pour rythmer la page comme les autres sections */
+  alt?: boolean;
+}
+
+const { sector, index, alt = false } = Astro.props;
+const projets = PROJECTS.filter((p) => p.sector === sector.id);
+---
+
+<Section id={`secteur-${sector.id}`} index={index} kicker={sector.label} title={sector.title} alt={alt}>
+  <p class="-mt-6 mb-10 max-w-2xl text-lg leading-relaxed text-mist">{sector.blurb}</p>
+
+  {projets.length > 0 ? (
+    <div class="grid gap-5 sm:grid-cols-2">
+      {projets.map((project) => <ProjectCard project={project} />)}
+    </div>
+  ) : (
+    <div class="rounded-lg border border-dashed border-line px-6 py-10 text-center">
+      <p class="font-medium text-fog">Projets en préparation</p>
+      <p class="mt-1 text-sm text-mist">
+        Cette section accueillera bientôt mes projets liés au secteur {sector.label.toLowerCase()}.
+      </p>
+    </div>
+  )}
+</Section>

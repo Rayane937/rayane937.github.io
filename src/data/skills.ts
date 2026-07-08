@@ -13,7 +13,7 @@ export const SKILL_GROUPS: SkillGroup[] = [
   {
     title: 'Langages',
     blurb: 'Un socle polyvalent, du bas niveau au web.',
-    skills: ['Java', 'JavaScript', 'Python', 'C++', 'SQL', 'HTML & CSS'],
+    skills: ['Java', 'C#', 'JavaScript', 'Python', 'C++', 'SQL', 'HTML & CSS'],
   },
   {
     title: 'Frontend',
@@ -29,6 +29,19 @@ export const SKILL_GROUPS: SkillGroup[] = [
     title: 'Data & Machine Learning',
     blurb: 'Analyse de données et NLP appliqué.',
     skills: ['scikit-learn', 'pandas', 'spaCy', 'NLP', 'Jupyter'],
+  },
+  {
+    title: 'Environnement industriel',
+    blurb: 'Outils et pratiques maîtrisés en stage chez Thales et HGH Infrared Systems.',
+    skills: [
+      'Visual Studio',
+      'C# / .NET',
+      'Migration .NET Framework → .NET 8',
+      'NuGet / Artifactory',
+      'Bitbucket',
+      'Git Flow',
+      'Robot Framework',
+    ],
   },
   {
     title: 'Outils & méthodes',

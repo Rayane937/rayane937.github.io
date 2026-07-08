@@ -1,10 +1,53 @@
 /**
- * Données des projets affichés dans la section « Projets ».
- * Chaque entrée correspond à un projet réel du dossier PROJETINFO.
+ * Données des projets, organisés par secteur d'intérêt.
+ * Chaque projet appartient à un secteur ; pour ajouter un projet dans une
+ * section, il suffit d'ajouter une entrée dans PROJECTS avec le bon `sector`.
  */
 
-/** Catégories utilisées par le filtre de la grille de projets */
-export type ProjectCategory = 'web' | 'data' | 'desktop';
+/** Les quatre secteurs affichés en sections distinctes sur la page */
+export type Sector = 'finance' | 'genie-civil' | 'aeronautique' | 'informatique';
+
+export interface SectorInfo {
+  id: Sector;
+  /** Libellé court (kicker de la section) */
+  label: string;
+  /** Titre de la section (h2) */
+  title: string;
+  /** Phrase d'introduction affichée sous le titre */
+  blurb: string;
+}
+
+/** Ordre d'affichage des sections secteur sur la page */
+export const SECTORS: SectorInfo[] = [
+  {
+    id: 'finance',
+    label: 'Finance',
+    title: 'Finance',
+    blurb:
+      'Analyse, modélisation et automatisation appliquées aux problématiques financières.',
+  },
+  {
+    id: 'genie-civil',
+    label: 'Génie civil',
+    title: 'Génie civil',
+    blurb:
+      'Le numérique au service de la construction, des infrastructures et de leur suivi.',
+  },
+  {
+    id: 'aeronautique',
+    label: 'Aéronautique',
+    title: 'Aéronautique',
+    blurb:
+      'Une passion de longue date pour le vol, explorée à travers des projets concrets.',
+  },
+  {
+    id: 'informatique',
+    label: 'Informatique',
+    title: 'Informatique',
+    blurb:
+      'Les projets qui ont forgé mes compétences techniques, du web au bas niveau.',
+  },
+];
 
 export interface Project {
   title: string;
@@ -14,7 +57,8 @@ export interface Project {
   description: string;
   /** Tags technologiques affichés sur la carte */
   tags: string[];
-  category: ProjectCategory;
+  /** Secteur dont relève le projet → détermine la section où il s'affiche */
+  sector: Sector;
   /** Lien vers le dépôt (null si le dépôt n'est pas public) */
   github: string | null;
   /** Lien vers une démo en ligne, si disponible */
@@ -22,13 +66,6 @@ export interface Project {
   /** Projet mis en avant : carte élargie en tête de grille */
   featured?: boolean;
 }
-
-export const CATEGORIES: { id: ProjectCategory | 'all'; label: string }[] = [
-  { id: 'all', label: 'Tous' },
-  { id: 'web', label: 'Web' },
-  { id: 'data', label: 'Data & ML' },
-  { id: 'desktop', label: 'Desktop & Jeux' },
-];
 
 export const PROJECTS: Project[] = [
   {
@@ -39,7 +76,7 @@ export const PROJECTS: Project[] = [
       'authentification JWT, recherche avec filtres, avis, commentaires et notifications. ' +
       'Frontend React, API REST Spring Boot sécurisée, base MySQL conteneurisée avec Docker.',
     tags: ['React', 'Spring Boot', 'Spring Security', 'MySQL', 'Docker', 'JWT'],
-    category: 'web',
+    sector: 'informatique',
     github: 'https://github.com/Rayane937/ProjetSp-2',
     demo: null,
     featured: true,
@@ -53,7 +90,7 @@ export const PROJECTS: Project[] = [
       '(portance, vent traversier, altimètre) et progression sauvegardée en localStorage. ' +
       '100 % statique, sans framework ni dépendance.',
     tags: ['JavaScript', 'Canvas', 'SVG', 'HTML/CSS', 'localStorage'],
-    category: 'web',
+    sector: 'aeronautique',
     github: null,
     demo: null,
   },
@@ -65,7 +102,7 @@ export const PROJECTS: Project[] = [
       'par équipe, vectorisation TF-IDF, régression logistique multinomiale et validation croisée ' +
       'stratifiée, comparées à des baselines (aléatoire, classement FIFA).',
     tags: ['Python', 'scikit-learn', 'NLP', 'pandas', 'spaCy'],
-    category: 'data',
+    sector: 'informatique',
     github: 'https://github.com/Rayane937/Projet_TextMining',
     demo: null,
   },
@@ -77,7 +114,7 @@ export const PROJECTS: Project[] = [
       'trois espaces métier (association, membres, municipalité), votes et nominations, visites, ' +
       'notifications et import du jeu de données open data des arbres de Paris.',
     tags: ['Java 17', 'JavaFX', 'Maven', 'MVC', 'OpenCSV'],
-    category: 'desktop',
+    sector: 'informatique',
     github: 'https://github.com/Nizar91300/Projet_Arbre',
     demo: null,
   },
@@ -89,7 +126,7 @@ export const PROJECTS: Project[] = [
       'et personnalisation du personnage. Réalisé en équipe dans le cadre du module ' +
       'Java graphique / IHM de l’Université Paris-Saclay.',
     tags: ['Java', 'MVC', 'IHM'],
-    category: 'desktop',
+    sector: 'informatique',
     github: null,
     demo: null,
   },
@@ -101,7 +138,7 @@ export const PROJECTS: Project[] = [
       'cartes polymorphe conçue en UML, boucle de jeu complète en console, musique via SDL2 ' +
       'et compilation Makefile.',
     tags: ['C++', 'POO', 'SDL2', 'Makefile', 'UML'],
-    category: 'desktop',
+    sector: 'informatique',
     github: 'https://github.com/TeeShirtNoir/projet_cpp_et4',
     demo: null,
   },

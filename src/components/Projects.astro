@@ -1,13 +1,18 @@
 ---
 /**
- * Section « Projets » : le rendu de la grille et le filtrage sont délégués
- * à l'île React ProjectsGrid (hydratée quand elle devient visible).
+ * Bloc « Projets » : une section distincte par secteur d'intérêt
+ * (Finance, Génie civil, Aéronautique, Informatique), toutes construites
+ * sur le même composant SectorSection. L'ancre #projets englobe le tout.
  */
-import Section from './Section.astro';
-import ProjectsGrid from './react/ProjectsGrid';
-import { PROJECTS } from '../data/projects';
+import SectorSection from './SectorSection.astro';
+import { SECTORS } from '../data/projects';
+
+// Numérotation des sections : 01 À propos, 02 Compétences, 03 → 06 secteurs
+const premierIndex = 3;
 ---
 
-<Section id="projets" index="03" kicker="Projets" title="Ce que j’ai construit" alt>
-  <ProjectsGrid projects={PROJECTS} client:visible />
-</Section>
+<div id="projets" class="scroll-mt-20">
+  {SECTORS.map((sector, i) => (
+    <SectorSection sector={sector} index={String(premierIndex + i).padStart(2, '0')} alt={i % 2 === 0} />
+  ))}
+</div>
