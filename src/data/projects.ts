@@ -4,8 +4,8 @@
  * section, il suffit d'ajouter une entrée dans PROJECTS avec le bon `sector`.
  */
 
-/** Les quatre secteurs affichés en sections distinctes sur la page */
-export type Sector = 'finance' | 'genie-civil' | 'aeronautique' | 'informatique';
+/** Catégorie de projet (une seule section Projets pour l'instant) */
+export type Sector = 'informatique';
 
 export interface SectorInfo {
   id: Sector;
@@ -17,35 +17,15 @@ export interface SectorInfo {
   blurb: string;
 }
 
-/** Ordre d'affichage des sections secteur sur la page */
+/** Section Projets (unique pour l'instant) */
 export const SECTORS: SectorInfo[] = [
   {
-    id: 'finance',
-    label: 'Finance',
-    title: 'Finance',
-    blurb:
-      'Analyse, modélisation et automatisation appliquées aux problématiques financières.',
-  },
-  {
-    id: 'genie-civil',
-    label: 'Génie civil',
-    title: 'Génie civil',
-    blurb:
-      'Le numérique au service de la construction, des infrastructures et de leur suivi.',
-  },
-  {
-    id: 'aeronautique',
-    label: 'Aéronautique',
-    title: 'Aéronautique',
-    blurb:
-      'Une passion de longue date pour le vol, explorée à travers des projets concrets.',
-  },
-  {
     id: 'informatique',
-    label: 'Informatique',
-    title: 'Informatique',
+    label: 'Réalisations',
+    title: 'Projets informatiques',
     blurb:
-      'Les projets qui ont forgé mes compétences techniques, du web au bas niveau.',
+      'Une sélection de projets qui ont forgé mes compétences, du web full-stack ' +
+      'à l’intelligence artificielle, en passant par la programmation système et bas niveau.',
   },
 ];
 
@@ -90,8 +70,20 @@ export const PROJECTS: Project[] = [
       '(portance, vent traversier, altimètre) et progression sauvegardée en localStorage. ' +
       '100 % statique, sans framework ni dépendance.',
     tags: ['JavaScript', 'Canvas', 'SVG', 'HTML/CSS', 'localStorage'],
-    sector: 'aeronautique',
+    sector: 'informatique',
     github: 'https://github.com/Rayane937/AeroTrainer',
+    demo: null,
+  },
+  {
+    title: 'Classification d’images',
+    tagline: 'Clustering non supervisé en Python',
+    description:
+      'Pipeline de regroupement automatique d’images par apprentissage non supervisé : ' +
+      'extraction de descripteurs (features CNN, couleur, histogrammes), clustering K-Means, ' +
+      'DBSCAN et HDBSCAN, évaluation des résultats et dashboard interactif Streamlit (Plotly).',
+    tags: ['Python', 'TensorFlow', 'scikit-learn', 'OpenCV', 'Streamlit', 'K-Means / DBSCAN'],
+    sector: 'informatique',
+    github: 'https://github.com/Rayane937/Projet_machine_learning',
     demo: null,
   },
   {

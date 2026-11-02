@@ -1,7 +1,9 @@
 /*
  * Feuille de style globale.
  * Le design system est défini ici via les tokens Tailwind v4 (@theme) :
- * palette "nuit" (bleu encre) + accent laiton, typo Inter Variable.
+ * palette claire & épurée (off-white chaud) + accent monochrome (gris anthracite),
+ * typo Inter Variable. Les noms de tokens restent inchangés (night/fog/brass…)
+ * pour que tous les composants suivent la nouvelle palette sans modification.
  */
 @import 'tailwindcss';
 
@@ -10,25 +12,75 @@
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Consolas, monospace;
 
-  /* Palette — fond */
-  --color-night: #0b0f17; /* fond principal */
-  --color-night-soft: #111827; /* fond alterné de section */
-  --color-card: #131c2c; /* surfaces (cartes, champs) */
-  --color-line: #223049; /* bordures discrètes */
+  /* Palette — fond (thème clair) */
+  --color-night: #faf9f6; /* fond principal (off-white chaud) */
+  --color-night-soft: #f1efe8; /* fond alterné de section */
+  --color-card: #ffffff; /* surfaces (cartes, champs) */
+  --color-line: #e6e2d8; /* bordures discrètes */
 
   /* Palette — texte */
-  --color-fog: #e8edf6; /* texte principal */
-  --color-mist: #9aa8bf; /* texte secondaire */
+  --color-fog: #1a1a17; /* texte principal (presque noir, chaud) */
+  --color-mist: #6e6b62; /* texte secondaire (gris chaud) */
 
-  /* Palette — accent (laiton) */
-  --color-brass: #e9b45c;
-  --color-brass-bright: #f2c77c;
+  /* Palette — accent (monochrome, discret) */
+  --color-brass: #3d3a33; /* accent : anthracite chaud */
+  --color-brass-bright: #1a1a17; /* état survol : presque noir */
 }
 
 /* Défilement doux vers les ancres, sauf si l'utilisateur préfère limiter les animations */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+
+  /*
+   * Apparition au défilement : les éléments .reveal sont masqués, puis
+   * l'observateur (Layout.astro) ajoute .is-visible qui joue l'animation.
+   * On utilise une animation (fill « backwards ») plutôt qu'une transition :
+   * ainsi, une fois entrée jouée, l'élément ne garde aucun transform résiduel
+   * et les effets de survol (translate/scale) restent libres.
+   * Tout est sous prefers-reduced-motion → zéro mouvement si l'utilisateur
+   * préfère limiter les animations.
+   */
+  .reveal {
+    opacity: 0;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    animation: revealIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+
+  /* Cascade : décalage d'entrée pour les éléments d'une même grille/liste */
+  .reveal.is-visible[data-delay='1'] { animation-delay: 0.08s; }
+  .reveal.is-visible[data-delay='2'] { animation-delay: 0.16s; }
+  .reveal.is-visible[data-delay='3'] { animation-delay: 0.24s; }
+  .reveal.is-visible[data-delay='4'] { animation-delay: 0.32s; }
+
+  /* Flottement doux (portrait du Hero, éléments décoratifs) */
+  .float-slow {
+    animation: floatSlow 6s ease-in-out infinite;
+  }
+}
+
+@keyframes revealIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
   }
 }
 

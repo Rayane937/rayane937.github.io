@@ -7,12 +7,12 @@
 import SectorSection from './SectorSection.astro';
 import { SECTORS } from '../data/projects';
 
-// Numérotation des sections : 01 À propos, 02 Compétences, 03 → 06 secteurs
-const premierIndex = 3;
+// Numérotation : 01 À propos, 02 Compétences, 03 Formation, puis les secteurs
+const premierIndex = 4;
 ---
 
 <div id="projets" class="scroll-mt-20">
   {SECTORS.map((sector, i) => (
-    <SectorSection sector={sector} index={String(premierIndex + i).padStart(2, '0')} alt={i % 2 === 0} />
+    <SectorSection sector={sector} index={String(premierIndex + i).padStart(2, '0')} alt={i % 2 === 1} />
   ))}
 </div>

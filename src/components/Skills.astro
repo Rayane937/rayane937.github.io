@@ -9,8 +9,11 @@ import { SKILL_GROUPS } from '../data/skills';
 
 <Section id="competences" index="02" kicker="Compétences" title="Ma boîte à outils">
   <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3" role="list">
-    {SKILL_GROUPS.map((group) => (
-      <li class="rounded-lg border border-line bg-card p-6 transition-colors hover:border-brass/40">
+    {SKILL_GROUPS.map((group, i) => (
+      <li
+        class="reveal rounded-lg border border-line bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/40 hover:shadow-xl hover:shadow-black/5"
+        data-delay={String((i % 4) + 1)}
+      >
         <h3 class="text-lg font-semibold text-fog">{group.title}</h3>
         <p class="mt-1 mb-4 text-sm text-mist">{group.blurb}</p>
         <ul class="flex flex-wrap gap-2" role="list">

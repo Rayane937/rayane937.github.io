@@ -15,3 +15,7 @@ Thumbs.db
 .idea/
 .vscode/
 *.log
+
+# Dossiers sources d'assets (originaux ; les copies servies sont dans public/)
+photo/
+LettreDeReco/

@@ -31,7 +31,7 @@ const jsonLd = JSON.stringify({
     <meta name="author" content={SITE.name} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="theme-color" content="#0b0f17" />
+    <meta name="theme-color" content="#faf9f6" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- Open Graph / partage sur les réseaux -->
@@ -53,5 +53,29 @@ const jsonLd = JSON.stringify({
       Aller au contenu
     </a>
     <slot />
+
+    <script>
+      // Révèle les éléments « .reveal » à leur entrée dans le viewport.
+      // Respecte prefers-reduced-motion et dégrade proprement sans IntersectionObserver.
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const cibles = document.querySelectorAll<HTMLElement>('.reveal');
+
+      if (prefersReduced || !('IntersectionObserver' in window)) {
+        cibles.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const observateur = new IntersectionObserver(
+          (entrees) => {
+            entrees.forEach((entree) => {
+              if (entree.isIntersecting) {
+                entree.target.classList.add('is-visible');
+                observateur.unobserve(entree.target);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -10% 0px' },
+        );
+        cibles.forEach((el) => observateur.observe(el));
+      }
+    </script>
   </body>
 </html>

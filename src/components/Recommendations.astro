@@ -1,0 +1,53 @@
+---
+/**
+ * Section « Lettres de recommandation » : une carte par lettre, avec lien
+ * vers le PDF (ouvert dans un nouvel onglet). Apparition au scroll + survol animé.
+ */
+import Section from './Section.astro';
+import { RECOMMANDATIONS } from '../data/recommendations';
+---
+
+<Section id="recommandations" index="05" kicker="Références" title="Lettres de recommandation" alt>
+  <p class="-mt-6 mb-10 max-w-2xl text-lg leading-relaxed text-mist">
+    Deux recommandations issues de mes expériences en entreprise, consultables en PDF.
+  </p>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    {RECOMMANDATIONS.map((r, i) => (
+      <article
+        class="reveal group flex flex-col rounded-lg border border-line bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brass/50 hover:shadow-xl hover:shadow-black/5"
+        data-delay={String(i + 1)}
+      >
+        <div class="flex items-center gap-4">
+          <span
+            class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-line text-brass transition-colors group-hover:border-brass/50"
+            aria-hidden="true"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <path d="M14 2v6h6M9 13h6M9 17h4"></path>
+            </svg>
+          </span>
+          <div>
+            <h3 class="text-lg font-semibold text-fog">{r.company}</h3>
+            <p class="mt-0.5 font-mono text-xs text-brass">{r.role}</p>
+          </div>
+        </div>
+
+        <p class="mt-4 grow leading-relaxed text-mist">{r.blurb}</p>
+
+        <a
+          href={r.file}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-6 inline-flex items-center gap-2 font-semibold text-fog transition-colors hover:text-brass"
+        >
+          Lire la lettre (PDF)
+          <svg class="transition-transform group-hover:translate-x-1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6"></path>
+          </svg>
+        </a>
+      </article>
+    ))}
+  </div>
+</Section>

@@ -1,0 +1,32 @@
+---
+/**
+ * Section « Formation » : frise chronologique verticale des diplômes.
+ * Chaque entrée apparaît en fondu/glissé lorsqu'elle entre dans le viewport
+ * (classe `.reveal`, animée par l'observateur global du Layout ;
+ * l'effet est désactivé si l'utilisateur préfère limiter les animations).
+ */
+import Section from './Section.astro';
+import { EDUCATION } from '../data/education';
+---
+
+<Section id="formation" index="03" kicker="Parcours" title="Formation" alt>
+  <ol class="relative ml-1 border-l border-line sm:ml-2" role="list">
+    {EDUCATION.map((d, i) => (
+      <li
+        class="reveal relative pb-10 pl-8 last:pb-0 sm:pl-10"
+        data-delay={String(Math.min(i + 1, 4))}
+      >
+        <!-- Pastille sur la ligne de temps -->
+        <span
+          class="absolute top-1.5 -left-[7px] h-3.5 w-3.5 rounded-full border-2 border-brass bg-night"
+          aria-hidden="true"
+        >
+        </span>
+        <p class="font-mono text-sm text-brass">{d.period}</p>
+        <h3 class="mt-1 text-lg font-semibold text-fog">{d.title}</h3>
+        <p class="text-mist">{d.school}</p>
+        <p class="mt-2 max-w-2xl leading-relaxed text-mist">{d.detail}</p>
+      </li>
+    ))}
+  </ol>
+</Section>
